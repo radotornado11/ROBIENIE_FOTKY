@@ -2,6 +2,7 @@ package rado.robienie_fotki;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -17,22 +18,25 @@ import java.net.Socket;
 
 public class SendMessage extends AsyncTask<Object, Object, String> {
 
-    TextView textView;
+
     String response = "";
     Bitmap photo;
     String dim = "";
     private static final int CAMERA_REQUEST = 1888;
 
-    public SendMessage(TextView text, Bitmap p){
-        this.textView =text;
+    public SendMessage(Bitmap p){
+
         this.photo = p;
+
+
+
     }
     @Override
     protected String doInBackground(Object... params) {
         Socket socket = null;
             try {
                 try {
-                    socket = new Socket("192.168.0.14", 8080);
+                    socket = new Socket("192.168.1.100", 8080);
                     System.out.println("SOCKET = " + socket);
 
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -68,7 +72,8 @@ public class SendMessage extends AsyncTask<Object, Object, String> {
     }
     @Override
     protected void onPostExecute(String result) {
-        textView.setText(response + " działa" + dim);
+
+
         super.onPostExecute(result);
     }
 }

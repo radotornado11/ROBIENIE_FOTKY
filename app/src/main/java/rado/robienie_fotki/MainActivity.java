@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     Button buttonRobZdjecie;
     Button buttonSlijFote;
+    Button buttonZatwierdz;
     Bitmap photo;
-    TextView textView;
 
     private static final int CAPTURE_FROM_CAMERA = 1;
 
@@ -49,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         buttonRobZdjecie = (Button) findViewById(R.id.button);
         buttonSlijFote = (Button) this.findViewById(R.id.button2);
-        textView = (TextView) findViewById(R.id.textView);
+        buttonZatwierdz = (Button) findViewById(R.id.button3);
 
         buttonSlijFote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SendMessage(textView, photo).execute(buttonSlijFote.getText().toString());
+                new SendMessage(photo).execute(buttonSlijFote.getText().toString());
                 buttonSlijFote.setText("Wysłano !");
             }
         });
@@ -74,6 +74,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 i.putExtra(MediaStore.EXTRA_OUTPUT, cameraPictureUri);
                 startActivityForResult(i,CAPTURE_FROM_CAMERA);
+            }
+        });
+
+        buttonZatwierdz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*
+                zapis do bazy
+                 */
             }
         });
     }
